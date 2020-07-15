@@ -11,8 +11,8 @@ class Quiz extends Component {
     answerState: null,
     quiz: [
       {
-        question: "Do you love me ?",
-        rightAnswerId: 1,
+        question: "Answer 2",
+        rightAnswerId: 2,
         id: 1,
         answers: [
           { text: "yes", id: 1 },
@@ -21,7 +21,7 @@ class Quiz extends Component {
         ],
       },
       {
-        question: "Do I love you ?",
+        question: "Answer 1",
         rightAnswerId: 1,
         id: 2,
         answers: [
