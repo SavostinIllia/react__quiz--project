@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-export default class QuizList extends Component {
+export default class QuizCreator extends Component {
   render() {
-    return <div>QuizList</div>;
+    return <div> QuizCreator</div>;
   }
 }
