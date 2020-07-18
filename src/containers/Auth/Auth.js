@@ -73,7 +73,6 @@ class Auth extends Component {
       control.value,
       control.validation
     );
-
     formControls[controlName] = control;
 
     let isFormValid = true;
@@ -81,7 +80,7 @@ class Auth extends Component {
     Object.keys(formControls).forEach((name) => {
       isFormValid = formControls[name].valid && isFormValid;
     });
-    console.log(isFormValid);
+
     this.setState({
       formControls,
       isFormValid,
@@ -93,7 +92,7 @@ class Auth extends Component {
       const control = this.state.formControls[controlName];
       return (
         <Input
-          key={controlName + index}
+          key={`${controlName} + " " + ${index}`}
           type={control.type}
           value={control.value}
           valid={control.valid}

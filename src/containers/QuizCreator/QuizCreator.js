@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import classes from "./QuizCreator.module.css";
 import Button from "../../components/UI/Button/Button";
-import { createControl } from "../../form/formCreator";
+import { createControl, validate, validateForm } from "../../form/formCreator";
 import Input from "../../components/UI/Input/Input";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Select from "../../components/UI/Select/Select";
+
 function createOptionControl(number) {
   return createControl(
     {
       label: `Option ${number}`,
+      isFormValid: false,
       errorMessage: "Option can not be empty",
       id: number,
     },
@@ -36,6 +38,7 @@ export default class QuizCreator extends Component {
   state = {
     quiz: [],
     rightAnswerID: 1,
+    isInvalid: false,
     formControls: createFormControls(),
   };
 
@@ -47,7 +50,21 @@ export default class QuizCreator extends Component {
 
   createQuizHandler = () => {};
 
-  changeHandler = (e, controlName) => {};
+  changeHandler = (value, controlName) => {
+    const formControls = { ...this.state.formControls };
+    const control = { ...formControls[controlName] };
+
+    control.touched = true;
+    control.value = value;
+    control.valid = validate(control.value, control.validation);
+
+    formControls[controlName] = control;
+
+    this.setState({
+      formControls,
+      isFormValid: validateForm(formControls),
+    });
+  };
 
   renderControls() {
     return Object.keys(this.state.formControls).map((controlName, index) => {
@@ -70,6 +87,7 @@ export default class QuizCreator extends Component {
       );
     });
   }
+
   selectChangeHandler = (e) => {
     this.setState({
       rightAnswerID: +e.target.value,
@@ -94,7 +112,7 @@ export default class QuizCreator extends Component {
     return (
       <div className={classes.QuizCreator}>
         <div>
-          <h1>Create you oun Quiz </h1>
+          <h1>Create your oun Quiz </h1>
           <form onSubmit={this.onSubmitHandler}>
             {this.renderControls()}
             {select}
