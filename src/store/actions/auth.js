@@ -25,7 +25,7 @@ export function auth(email, password, isLogin) {
 
     localStorage.setItem("token", data.idToken);
     localStorage.setItem("userId", data.localId);
-    localStorage.setItem("expirationDate", expirationDate);
+    localStorage.setItem("expirationDate", data.expiresIn);
 
     dispatch(authSuccess(data.idToken));
     dispatch(autoLogout(data.expiresIn));
@@ -55,3 +55,5 @@ export function authSuccess(token) {
     token,
   };
 }
+
+export function autoLogin() {}
